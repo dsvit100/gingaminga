@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+{{question.title}}<hr>
+{{question.content1}}<hr>
+{{question.content2}}<hr>
+<a href="{% url 'questions:delete' question.id %}">delete</a>
+<a href="{% url 'questions:update' question.id%}">update</a>
+<a href="{% url 'questions:index'%}">home</a>
+<hr>
+<form action="" method="POST">
+    {% csrf_token%}
+    {{form}}
+    <input type="submit">
+</form>
+{% endblock %}
