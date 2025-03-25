@@ -7,9 +7,15 @@
 <a href="{% url 'questions:update' question.id%}">update</a>
 <a href="{% url 'questions:index'%}">home</a>
 <hr>
-<form action="" method="POST">
+<form action="{% url 'questions:comment_create' question.id %}" method="POST">
     {% csrf_token%}
     {{form}}
     <input type="submit">
 </form>
+
+{% for comment in comments %}
+    <li>{{comment.comment}}</li>
+    <!-- comment(for문 돌려 나온 comment).comment(컬럼) -->
+    <a href="{% url 'questions:comment_delete' question.id comment.id %}">delete</a>
+{% endfor %}
 {% endblock %}

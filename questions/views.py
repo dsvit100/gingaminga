@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import QuestionForm, CommentForm
-from .models import Question
+from .models import Question, Comment
 
 # Create your views here.
 def create(request):
@@ -34,10 +34,12 @@ def index(request):
 
 def detail(request, id):
     question = Question.objects.get(id=id)
+    comments = question.comment_set.all()
     form = CommentForm()
     context = {
         'question': question,
         'form': form,
+        'comments': comments,
     }
     return render(request, 'detail.html', context)
 
@@ -77,5 +79,11 @@ def comment_create(request, question_id):
             comment.save() # 삽입한 데이터 저장
             return redirect('questions:detail', id=question_id)
     else:
-        return redirect('articles:index')
+        return redirect('questions:index')
+
+
+def comment_delete(request, question_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('questions:detail', id=question_id)
 

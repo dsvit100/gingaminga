@@ -13,4 +13,5 @@ urlpatterns = [
     # Comment
     # Create
     path('<int:question_id>/comment/create', views.comment_create, name='comment_create'),
+    path('<int:question_id>/comment/<int:comment_id>/delete', views.comment_delete, name='comment_delete'),
 ]

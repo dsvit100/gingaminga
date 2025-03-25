@@ -4,6 +4,7 @@
 {% for question in questions %}
     <hr>{{question.title}}
     <a href="{% url 'questions:detail' question.id %}">detail</a>
+    <a href="{% url 'questions:create' %}">create</a>
 {% endfor %}
 
 {% endblock %}
